@@ -11,7 +11,7 @@ labels <- read.table(file1, row.names=1)
 labels <- t(labels)  ##transposes the column with the row
 
 ## imports and merges training data
-setwd("C:/Users/Tim/Documents/R programming/03 Data Course/project/UCI HAR Dataset")
+setwd("C:/Users/Tim/Documents/R programming/03 Data Course/project/UCI HAR Dataset") ## again, you may need to modify this on your machine
 setwd("./train")
 file1 <- "./y_train.txt" ## ytrain.txt contains the 6 different types of activities
 ytrain <- read.table(file1)
@@ -43,10 +43,8 @@ ytest <- data.table(ytest) ##converts data frames to data tables for easier merg
 xtest <- data.table(xtest)
 stest <- data.table(stest)
 mtest<-cbind(stest,ytest,xtest)  ## merge tables together to complete full TESTING set
-## write.table(mergedset, "tidy_V1.txt", sep = ,) ##pasted file in testing of script, commented out during actual running
-
-mergedset <- rbind(mtrain,mtest)
-## write(mergedset, "./output-tidy1.csv")
+## write.table(mergedset, "tidyV1.txt", sep = ,) ##pasted file in testing of script, commented out during actual running
+mergedset <- rbind(mtrain,mtest)  ## combines the test and train data into one full set
 
 ## Step 2: extract only the measurements on the mean and standard deviation
 ## per the previous style guide, the terms used are "mean" and "std"
@@ -77,7 +75,6 @@ names(merged2) <- sub("gyro","gyroscope",names(merged2), ignore.case = TRUE)
 names(merged2) <- sub("mag","magnitude",names(merged2), ignore.case = TRUE)
 names(merged2) <- sub("std","standarddeviation",names(merged2), ignore.case = TRUE)
 names(merged2) <- sub("tbody","timebody",names(merged2), ignore.case = TRUE)
-names(merged2) <- sub("()","",names(merged2), ignore.case = TRUE)
 names(merged2)
 
 ## Step 5: aggregate by activity type and subject creating "wide" version
